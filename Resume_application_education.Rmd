@@ -1,0 +1,46 @@
+---
+title: "Résumé de notre application sur l'éducation"
+author: "Clémence Chesnais - Marie Guibert"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+# [Projet de visualisation de données]{.underline}
+
+*CHESNAIS Clémence - 21901191\
+GUIBERT Marie - 21901412*
+
+## Introduction
+
+L'éducation représente "l'art de former une personne en développant ses capacités physiques, intellectuelles et morales, de façon à lui permettre d'affronter sa vie personnelle et sociale avec une personnalité suffisamment épanouie". C'est donc un élément majeur dans le développement économique et social d'un pays. Cependant, de nombreuses inégalités existent entre eux dans ce domaine. Ces disparités se traduisent par différents exemples comme l'inégalité d'accès face à l'éducation, les écarts de niveaux de vie entre les pays mais aussi entre les familles. Elles peuvent donc avoir des conséquences néfastes sur la vie des individus.\
+Ainsi, nous avons choisi d'étudier les causes et les conséquences des inégalités dans le domaine de l'éducation.\
+Notre objectif étant de mieux comprendre les enjeux et les défis des différents systèmes éducatifs des pays de l'OCDE (et plus particulièrement en France). Notre application est principalement conçue pour observer ces inégalités et leurs évolutions entre 2014 et 2021.
+
+-   choix du sujet
+-   quel objectif
+-   pourquoi l'application sera utilisée
+
+## L'application
+
+### Principales fonctionnalités de notre application
+
+-   évolutions dans le domaine de l'éducation
+-   exemples =\> choix années / pays
+
+### Conception de l'application
+
+-   techniques utilisées : dashboard
+
+### Interface utilisateur
+
+-   facilité d'utilisation
+-   ergonomie
+
+### Exemples de graphiques (titres à modifier)
+
+-   commentaires sur les différents graphiques : illustration
+
+## Conclusion
+
+-   pourquoi notre application est utile
+-   qu'est ce qu'on pourrait faire pour l'améliorer ?

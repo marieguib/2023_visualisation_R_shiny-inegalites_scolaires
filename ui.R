@@ -101,7 +101,7 @@ shinyUI(
                   ),
                   mainPanel(
                     withSpinner(
-                      plotOutput("camembert_college"),
+                      plotOutput("treemap_college"),
                       type = 1),
                     withSpinner(
                       plotOutput("camembert_lycee"),
@@ -114,9 +114,6 @@ shinyUI(
                       type = 1),
                     withSpinner(
                       plotOutput("reussite_bac_PCS"),
-                      type = 1),
-                    withSpinner(
-                      plotOutput("evol_enseignant_eleves"),
                       type = 1)
                   )
                 )
@@ -127,21 +124,18 @@ shinyUI(
                 fluidPage(
                   titlePanel("Les inégalités territoriales"),
                   tabsetPanel(
-                    # tabPanel("Condition d'apprentissage", # evolution du nombre d'enseignant par élève et le taux reussite
-                    #          fluidRow(
-                    #            selectizeInput("Pays_mobilite",label="Pays",
-                    #                           choices = list("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
-                    #                                          "France","G20","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
-                    #                                          "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA")),
-                    #          ),
-                    #          fluidRow(
-                    #            box(title="Evolution nombre d'enseignant par élèves",
-                    #                fluidRow(style='margin:6px;'),
-                    #                withSpinner(
-                    #                  plotOutput("evol_enseignant_eleves"),
-                    #                  type=1)
-                    #            ),
-                    #            
+                    tabPanel("Condition d'apprentissage", # evolution du nombre d'enseignant par élève et le taux reussite
+                             fluidRow(
+                               selectizeInput("Pays_mobilite",label="Pays",
+                                              choices = list("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
+                                                             "France","G20","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
+                                                             "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA"))
+                             ),
+                             fluidRow(
+                               box(title="Evolution nombre d'enseignant par élèves",
+                                     plotOutput("evol_enseignant_eleves")
+                               ))),
+                    # 
                     #            box(title = "Carte du nombre d'élèves",
                     #                radioButtons(inputId="annee_carte",label = "Choisissez une année :",choices=c(2014,2015,2016,2017,2018,2019,2020,2021)),
                     #                fluidRow(style="margin:6px;")

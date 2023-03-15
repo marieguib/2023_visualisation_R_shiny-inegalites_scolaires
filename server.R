@@ -75,7 +75,7 @@ shinyServer(function(input, output) {
   ### Inégalités socio-économiques
   
   # Classes sociales au college
-  output$camembert_college <- renderPlot({
+  output$treemap_college <- renderPlot({
     
     df <- data.frame(
       group = c("très favorisé","favorisé","moyenne","défavorisé"),
@@ -114,6 +114,11 @@ shinyServer(function(input, output) {
     comp_college_PU_PR
   })
   
+  # Table reussite DNB selon le secteur privé / public 
+  output$reussite_secteur <- renderDataTable({
+    taux_reussite_secteur
+  })
+  
   # Reussite bac selon PCS au lycee
   output$reussite_bac_PCS <- renderPlot({
     fr_reussite_bac |> filter(Origine_sociale==input$origine_sociale) |> 
@@ -147,13 +152,21 @@ shinyServer(function(input, output) {
    carte
   })
   
-  # Table reussite DNB selon le secteur privé / public 
-  output$reussite_secteur <- renderDataTable({
-    taux_reussite_secteur
+
+  # Evolution du nombre d'enseignants par élèves
+  output$evol_enseignant_eleves <- renderPlot({
+    d <- enseignant_par_eleves |>
+      filter(LOCATION==input$Pays_mobilite) |>
+      group_by(TIME) |>
+      mutate(nb_moy = mean(VALUE))
+
+    m <- ggplot(d)+
+      aes(x=TIME,y=nb_moy)+
+      geom_line()
+    m
+
   })
-  
-  
-  
+
   # Etudiants en mobilite internationale
   output$mobilite <- renderPlot({
     ggplot(etud_mobilite)+
