@@ -2,7 +2,8 @@ library(shiny)
 
 shinyUI(
   dashboardPage(
-    dashboardHeader(title="Les inégalités dans le milieu scolaire",# Titre de l'application,
+    dashboardHeader(title=HTML("Les inégalités dans le milieu scolaire"),# Titre de l'application
+                    disable= FALSE,
                     titleWidth = 380,
                     tags$li(class="dropdown",tags$a(href="https://twitter.com/education_gouv", icon("twitter"), "Twitter", style="color:white")),
                     tags$li(class="dropdown",tags$a(href="https://www.education.gouv.fr/",  "Site Officiel", style="color:white")),
@@ -10,10 +11,10 @@ shinyUI(
                     dropdownMenu(type="message", messageItem(from="Notification",message="Bienvenue sur notre application WEB!",icon=icon("envelope-open")))
     ), 
     dashboardSidebar( # Menu de l'application
-      width = 350,
+      width = 220,
       sidebarMenu(
         menuItem("Accueil", tabName = "Accueil", icon = icon("home")),
-        menuItem("Inégalités socio-économiques", tabName = "social", icon = icon("money-bills")),
+        menuItem(HTML("Inégalités \n socio-économiques"), tabName = "social", icon = icon("money-bills")),
         menuItem("Inégalités territoriales",tabName = "geo", icon = icon("flag")),
         menuItem("Inégalités de genre", tabName = "genre",icon=icon("venus-mars")),
         menuItem("Bases de données",tabName = "BDD",icon = icon("database"))
@@ -97,27 +98,44 @@ shinyUI(
                                    choices = list("Agriculteurs exploitants","Artisans, commerçants, chefs d'entreprise","Autres personnes sans activité professionnelle",
                                                   "Cadres, professions intellectuelles supérieures","Cadres, professions intellectuelles supérieures : professeurs et assimilés",
                                                   "dont instituteurs et assimilés","dont professeurs et assimilés","Employés","Ensemble","Indéterminé","Ouvriers",
-                                                  "Professions intermédiaires","Professions intermédiaires : instituteurs et assimilés","Retraités"))
+                                                  "Professions intermédiaires","Professions intermédiaires : instituteurs et assimilés","Retraités")),
+                    width = 3
                   ),
                   mainPanel(
-                    withSpinner(
-                      plotOutput("treemap_college"),
-                      type = 1),
-                    withSpinner(
-                      plotOutput("camembert_lycee"),
-                      type = 1),
-                    withSpinner(
-                      dataTableOutput("reussite_secteur"),
-                      type = 1),
-                    withSpinner(
-                      amChartsOutput("amchartComparaisonPCS"),
-                      type = 1),
-                    withSpinner(
-                      plotOutput("reussite_bac_PCS"),
-                      type = 1)
+                  tabsetPanel(
+                    tabPanel("Origines sociales",
+                             style='margin:6px;',
+                             h1("L'impact de l'origine sociale sur la scolarité"),
+                             
+                             h2(paste0("Des chiffres clés")),
+                             fluidRow(
+                               valueBoxOutput("bac_origine_sociale") ,
+                               valueBoxOutput("bac_sans_emploi") ,
+                               valueBoxOutput("bac_cadre")
+                             ) ,
+                             withSpinner(
+                              plotOutput("treemap_college"),
+                              type = 1),
+                          withSpinner(
+                            plotOutput("camembert_lycee"),
+                            type = 1),
+                          withSpinner(
+                            plotOutput("reussite_bac_PCS"),
+                            type = 1)
+                          ),
+                    tabPanel("Privé ou public ?",
+                             style='margin:6px;',
+                             withSpinner(
+                               dataTableOutput("reussite_secteur"),
+                               type = 1),
+                             withSpinner(
+                               amChartsOutput("amchartComparaisonPCS"),
+                               type = 1)
+                    )
                   )
-                )
-        ),
+                  )
+                                  
+        )),
         
         ### Inégalités territoriales
         tabItem(tabName = "geo",
@@ -158,7 +176,7 @@ shinyUI(
                     #                type = 1))
                     # ),
                     
-                    tabPanel("Mobilité des jeunes",
+                    tabPanel("Etudiants en mobilité internationale",
                              selectizeInput("Pays_mobilite",label="Pays",
                                             choices = list("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
                                                            "France","G20","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",

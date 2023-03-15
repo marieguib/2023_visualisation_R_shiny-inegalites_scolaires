@@ -1,16 +1,13 @@
 ### Environnement de travail ---
 library(readxl)
 library(readr)
-library(dplyr)
 library(tidyverse)
 library(leaflet)
 library(sf)
 library(rAmCharts)
 library(DT)
 library(BH)
-library(ggplot2)
 library(treemap)
-library(shiny)
 library(shiny)
 library(shinydashboard)
 library(shinyWidgets)
@@ -288,3 +285,16 @@ df_PCS <- data.frame(
 colnames(df_PCS) <- c("Origine_sociale","Pct_admis_baccalaureat")
 df_PCS <- df_PCS |> filter(Origine_sociale!="Ensemble")
 df_PCS
+
+
+# Values-Box 
+baccalaureat_cadre <- df_PCS |> 
+  filter(Origine_sociale=='Cadres, professions intellectuelles superieures')
+bac_cadre
+
+baccalaureat_sans_emploi <-df_PCS |> 
+  filter(Origine_sociale=='Autres personnes sans activite professionnelle')
+baccalaureat_sans_emploi
+  
+baccalaureat <- round(sum(df_PCS$Pct_admis_baccalaureat)/nrow(df_PCS))
+baccalaureat

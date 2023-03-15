@@ -74,6 +74,35 @@ shinyServer(function(input, output) {
   
   ### Inégalités socio-économiques
   
+  # Values-box
+  output$bac_origine_sociale <- renderValueBox({
+    valueBox(
+      paste(baccalaureat,"%"),
+      subtitle = " d'admis au baccalauréat quelque soit la classe sociale",
+      icon = icon('diploma'),
+      color = "green"
+    )
+  })
+  
+  output$bac_sans_emploi <- renderValueBox({
+    valueBox(
+      paste(round(baccalaureat_sans_emploi$Pct_admis_baccalaureat),"%"),
+      subtitle = "d'admis au baccalauréat avec des parents sans activite professionnelle",
+      icon = icon('diploma'),
+      color = "red"
+    )
+  })
+  
+  output$bac_cadre <- renderValueBox({
+    valueBox(
+      paste(round(baccalaureat_cadre$Pct_admis_baccalaureat),"%"),
+      subtitle = "d'admis au baccalauréat avec des parents cadres ou en professions intellectuelles supérieures",
+      icon = icon('diploma'),
+      color = "green"
+    )
+  })
+  
+  
   # Classes sociales au college
   output$treemap_college <- renderPlot({
     
@@ -90,7 +119,7 @@ shinyServer(function(input, output) {
                  type="index",
                  border.col = "black",
                  palette = "Blues",
-                 title="Répartition des clases sociales au collège")
+                 title="Répartition des classes sociales au collège")
     p
     
   })
