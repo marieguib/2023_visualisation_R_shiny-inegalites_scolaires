@@ -18,6 +18,7 @@ library(rmapshaper)
 library(rnaturalearthdata)
 library(rnaturalearth)
 
+options(shiny.locale = "fr_FR")
 
 ### Importations des bases de données ---
 
@@ -115,9 +116,9 @@ summary(fr_bac_academie)
 ### Importations des fonds de carte ---
 
 # Départements de France
-dpt <- read_sf("data/dpt") 
-ggplot(dpt)+
-  geom_sf()
+# dpt <- read_sf("data/dpt") 
+# ggplot(dpt)+
+#   geom_sf()
 
 # Monde : pays de l'OCDE
 
@@ -222,43 +223,43 @@ voies <- ggplot(df1) +
 
 
 # Carte : Taux de réussite DNB par département 
-dpt <- sf::read_sf("data/dpt") 
-# Jointure entre dpt et fr_dnb_etablissement pour récupérer les multipolygons associés aux dpt
-dpt2 <- merge(x=fr_dnb_etablissement,y=dpt,by.x="Libellé_département",by.y="NOM_DEPT")
-# VOIR AVEC INNER JOIN
-dpt3 <- dpt2 |>
-  select(Session,`Code département`,Inscrits,Admis,geometry) |> 
-  mutate(reussite = Admis/Inscrits*100)
-
-# Carte : PCS majoritaire selon le département 
-dpt5 <- merge(x=fr_indicateur_segreg_college,y=dpt,by.x="nom_dep",by.y="NOM_DEPT") #Jointure entre les deux tables
-# dpt5 <- 
+# dpt <- sf::read_sf("data/dpt") 
+# # Jointure entre dpt et fr_dnb_etablissement pour récupérer les multipolygons associés aux dpt
+# dpt2 <- merge(x=fr_dnb_etablissement,y=dpt,by.x="Libellé_département",by.y="NOM_DEPT")
+# # VOIR AVEC INNER JOIN
+# dpt3 <- dpt2 |>
+#   select(Session,`Code département`,Inscrits,Admis,geometry) |> 
+#   mutate(reussite = Admis/Inscrits*100)
+# 
+# # Carte : PCS majoritaire selon le département 
+# dpt5 <- merge(x=fr_indicateur_segreg_college,y=dpt,by.x="nom_dep",by.y="NOM_DEPT") #Jointure entre les deux tables
+# # dpt5 <- 
 
 
 # Carte Taux de scolarisation en france
-regions <- read_sf("data/regions-20180101-shp/")
-regions1 <- ms_simplify(regions)
-regions2 <- merge(x=regions1,y=fr_taux_scolarisation_reg,by.x="code_insee",by.y = "Numero")
-format(object.size(regions2),units="Mb")
+# regions <- read_sf("data/regions-20180101-shp/")
+# regions1 <- ms_simplify(regions)
+# regions2 <- merge(x=regions1,y=fr_taux_scolarisation_reg,by.x="code_insee",by.y = "Numero")
+# format(object.size(regions2),units="Mb")
+# 
+# carte_tx_scolarisation <- ggplot(regions2)+geom_sf()+
+#   geom_sf(aes(fill=`Total premier degre`))+
+#   coord_sf(xlim = c(-5.5,10),ylim=c(41,51))+
+#   scale_fill_continuous(low="yellow",high="red")+
+#   labs(title = "Taux de scolarisation (en maternelle et primaire) en France")+
+#   theme_void()
 
-carte_tx_scolarisation <- ggplot(regions2)+geom_sf()+
-  geom_sf(aes(fill=`Total premier degre`))+
-  coord_sf(xlim = c(-5.5,10),ylim=c(41,51))+
-  scale_fill_continuous(low="yellow",high="red")+
-  labs(title = "Taux de scolarisation (en maternelle et primaire) en France")+
-  theme_void()
 
-
-# Carte enseignants par élèves : OCDE
-world <- ne_countries(returnclass = "sf")
-# head(world)
-world <- st_transform(world, "+proj=longlat +datum=WGS84")
-
-# Carte vide :
-map <- leaflet() |> 
-  addTiles() |> 
-  setView(lng=0,lat=30,zoom=2)
-map
+# # Carte enseignants par élèves : OCDE
+# world <- ne_countries(returnclass = "sf")
+# # head(world)
+# world <- st_transform(world, "+proj=longlat +datum=WGS84")
+# 
+# # Carte vide :
+# map <- leaflet() |> 
+#   addTiles() |> 
+#   setView(lng=0,lat=30,zoom=2)
+# map
 
 
 
