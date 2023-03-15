@@ -166,6 +166,49 @@ shinyServer(function(input, output) {
     m
 
   })
+  
+  # Carte du nombre d'enseignant par élèves
+  # merge world et enseignant par eleve
+  # output$carte_evol_enseignant <- renderLeaflet({
+  #   
+  #   # INTRODUIRE UN REACTIVE
+  #   enseignant_par_eleves <- enseignant_par_eleves |> 
+  #     filter(LOCATION==input$Pays_mobilite) |> 
+  #     group_by(TIME) |> 
+  #     mutate(nb_moy = mean(VALUE))
+  #   
+  #   world2 <- merge(x=world,y=enseignant_par_eleves,by.x="sov_a3",by.y="ACRONYME_PAYS")
+  #   
+  #   world3 <- world2 |> 
+  #     filter(TIME==input$annee_carte)
+  #   
+  #   coords <- st_coordinates(world3)
+  #   longitude <- coords[,"X"]
+  #   latitude <- coords[,"Y"]
+  # 
+  #   pal <- colorNumeric(scales::seq_gradient_pal(low = "yellow", high = "red",
+  #                                                space = "Lab"), domain = world3$nb_moy)
+  #   
+  #   
+  #   map <- leaflet() |>
+  #     addTiles() |>
+  #     setView(lng=0,lat=30,zoom=2) |>
+  #     addPolygons(data = world3,color=~pal(nb_moy),
+  #                 fillOpacity = 0.6) |>
+  #                 # stroke = TRUE,weight=1,
+  #                 # popup=~paste(as.character(NOM_DEPT),
+  #                 #              as.character(t_prev),
+  #                 #              sep=" : "),
+  #                 # highlightOptions = highlightOptions(color = "black",
+  #                 #                                     weight = 3,
+  #                 #                                     bringToFront = TRUE)) %>%
+  #     addLayersControl(options=layersControlOptions(collapsed = FALSE))
+  # 
+  #   map
+  #   
+  #                         
+  #                        
+  # })
 
   # Etudiants en mobilite internationale
   output$mobilite <- renderPlot({
