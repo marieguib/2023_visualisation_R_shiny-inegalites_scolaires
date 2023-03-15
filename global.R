@@ -291,7 +291,7 @@ df_PCS
 # Values-Box 
 baccalaureat_cadre <- df_PCS |> 
   filter(Origine_sociale=='Cadres, professions intellectuelles superieures')
-bac_cadre
+baccalaureat_cadre
 
 baccalaureat_sans_emploi <-df_PCS |> 
   filter(Origine_sociale=='Autres personnes sans activite professionnelle')
