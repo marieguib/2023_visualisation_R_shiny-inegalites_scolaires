@@ -3,6 +3,9 @@ title: "Résumé de notre application sur l'éducation"
 author: "Clémence Chesnais - Marie Guibert"
 date: "`r Sys.Date()`"
 output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # [Projet de visualisation de données]{.underline}
@@ -12,9 +15,22 @@ GUIBERT Marie - 21901412*
 
 ## Introduction
 
-L'éducation représente "l'art de former une personne en développant ses capacités physiques, intellectuelles et morales, de façon à lui permettre d'affronter sa vie personnelle et sociale avec une personnalité suffisamment épanouie". C'est donc un élément majeur dans le développement économique et social d'un pays. Cependant, de nombreuses inégalités existent entre eux dans ce domaine. Ces disparités se traduisent par différents exemples comme l'inégalité d'accès face à l'éducation, les écarts de niveaux de vie entre les pays mais aussi entre les familles. Elles peuvent donc avoir des conséquences néfastes sur la vie des individus.\
-Ainsi, nous avons choisi d'étudier les causes et les conséquences des inégalités dans le domaine de l'éducation.\
-Notre objectif étant de mieux comprendre les enjeux et les défis des différents systèmes éducatifs des pays de l'OCDE (et plus particulièrement en France). Notre application est principalement conçue pour observer ces inégalités et leurs évolutions entre 2014 et 2021.
+L'éducation représente "l'art de former une personne en développant ses
+capacités physiques, intellectuelles et morales, de façon à lui
+permettre d'affronter sa vie personnelle et sociale avec une
+personnalité suffisamment épanouie". C'est donc un élément majeur dans
+le développement économique et social d'un pays. Cependant, de
+nombreuses inégalités existent entre eux dans ce domaine. Ces disparités
+se traduisent par différents exemples comme l'inégalité d'accès face à
+l'éducation, les écarts de niveaux de vie entre les pays mais aussi
+entre les familles. Elles peuvent donc avoir des conséquences néfastes
+sur la vie des individus.\
+Ainsi, nous avons choisi d'étudier les causes et les conséquences des
+inégalités dans le domaine de l'éducation.\
+Notre objectif étant de mieux comprendre les enjeux et les défis des
+différents systèmes éducatifs des pays de l'OCDE (et plus
+particulièrement en France). Notre application est principalement conçue
+pour observer ces inégalités et leurs évolutions entre 2014 et 2021.
 
 -   choix du sujet
 -   quel objectif
@@ -26,34 +42,101 @@ Notre objectif étant de mieux comprendre les enjeux et les défis des différen
 
 Le système éducatif s'est construit au fil des années et a laissé place à des améliorations, notamment l'accès à l'école pour les milieux défavorisés et pour les femmes. Cependant, de nombreuses inégalités persistent. Notre application a pour but de montrer ces évolutions dans le domaine de l'éducation. L'utilisateur a donc la possibilité de sélectionner le pays dont il souhaite visualiser cette évolution. Il peut aussi sélectionner une année afin d'analyser les changements dans différents domaines comme par exemple, la répartition des classes sociales au collège.
 
+
 -   évolutions dans le domaine de l'éducation
 -   exemples =\> choix années / pays
 
 ### Conception de l'application
 
+<<<<<<< HEAD
 Nous avons fait le choix de créer une application dashboard en utilisant la structure suivante avec dashboardPage() : - dashboardHeader() - dashboardSidebar() - dashboardBody()
+=======
+Nous avons fait le choix de créer une application dashboard en utilisant
+la structure suivante avec dashboardPage() : - dashboardHeader() -
+dashboardSidebar() - dashboardBody()
+>>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 
-En arrivant sur notre site, nous tombons sur la page d'accueil qui présente notre sujet, expose certaines grandes lois et quelques personnes qui ont marqué l'histoire de l'éducation dans différents pays de l'OCDE.
+En arrivant sur notre site, nous tombons sur la page d'accueil qui
+présente notre sujet, expose certaines grandes lois et quelques
+personnes qui ont marqué l'histoire de l'éducation dans différents pays
+de l'OCDE.
 
-Puisque notre sujet traite des inégalités dans le mileu scolaire, nous avons souhaité examiner chacune d'elles dans un onglet différents. Par conséquent, dans le menu déroulant, en plus de l'acceuil, il y a trois onglets : un onglet sur les inégalités sociales, un onglet sur les inégalités territoriales et un onglet sur les inégalités de genre dans l'éducation.
+Puisque notre sujet traite des inégalités dans le mileu scolaire, nous
+avons souhaité examiner chacune d'elles dans un onglet différents. Par
+conséquent, dans le menu déroulant, en plus de l'acceuil, il y a trois
+onglets : un onglet sur les inégalités sociales, un onglet sur les
+inégalités territoriales et un onglet sur les inégalités de genre dans
+l'éducation.
 
+<<<<<<< HEAD
 Enfin, un dernier onglet comporte nos bases de données pour préciser nos sources.
+=======
+Enfin, un dernier onglet comporte nos bases de données pour préciser nos
+sources.
+>>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 
 -   techniques utilisées : dashboard
 -   Expliquer comment est construit l'app
 
 ### Interface utilisateur
 
+<<<<<<< HEAD
 Notre objectif était de construire une application interactive, facile d'utilisation, ergonomique et esthétique, pour que l'utilisateur "comprennent bien" les enjeux du sujet. Pour cela, nous avons utilisé different package.
+=======
+Notre objectif était de construire une application interactive, facile
+d'utilisation, ergonomique et esthétique, pour que l'utilisateur
+"comprennent bien" les enjeux du sujet. Pour cela, nous avons utilisé
+different package.
+>>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 
-<u>Pour la programmation R</u> :
+[Pour la programmation R]{.underline}:
 
+<<<<<<< HEAD
 -   library(tidyverse) : inclut de nombreux packages R tels que dplyr, ggplot2, tidyr, readr, forcats, purrr et d'autres encore. Ce package permet donc de filtrer, trier, sélectionner et agréger des données, de nettoyer et mettre en forme des donnéesréer des graphiques personnalisés et des visualisations.
+=======
+-   package tidyverse : inclut de nombreux packages R tels que dplyr,
+    ggplot2, tidyr, readr, forcats, purrr et d'autres encore. Ce package
+    permet donc de filtrer, trier, sélectionner et agréger des données,
+    de nettoyer et mettre en forme des données
 
+[Pour la visualisation des données]{.underline} :
+>>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
+
+-   package ggplot : créer des graphiques personnalisés et des
+    visualisations.
+
+-   package rAmCharts :
+
+-   package DT :
+
+-   package treemap
+
+-   package leaflet : faire des cartes interractive
+
+Pour l'ergonomie et esthétique de l'application :
+
+-   package shiny
+
+-   package shinyWedget
+
+-   package dashboardthemes
+
+-   package shinythemes
+
+-   package
+
+-   package
+
+```{=html}
+<!-- -->
+```
 -   facilité d'utilisation
 
 -   ergonomie
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 -   Différents package utilisé
 
 ### Exemples de graphiques (titres à modifier)
