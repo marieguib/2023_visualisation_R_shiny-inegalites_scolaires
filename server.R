@@ -259,16 +259,14 @@ shinyServer(function(input, output) {
   ### Sources
 
   # Affichage des bases de données
-  output$enseignants_eleves <- renderDataTable({DT::datatable(data=head(enseignant_par_eleves))})
-  output$taux_obtention <- renderDataTable({DT::datatable(data=head(taux_obtention_diplome))})
-  output$segregation <- renderDataTable({DT::datatable(data=head(fr_indicateur_segreg_college))})
-  # output$tx_scolarisation <- renderDataTable({DT::datatable(data=head(taux_scolarisation))})
-  # output$mobilite <- renderDataTable({DT::datatable(data=head(etud_mobilite))})
-  # output$fr_scolarisation_dpt <- renderDataTable({DT::datatable(data=head(fr_taux_scolarisation_dpt))})
-  # output$fr_scolarisation_reg <- renderDataTable({DT::datatable(data=head(fr_taux_scolarisation_reg))})
-  # output$fr_reuss_bac <- renderDataTable({DT::datatable(data=head(fr_reussite_bac))})
-  # output$fr_dnb_etab <- renderDataTable({DT::datatable(data=head(fr_dnb_etablissement))})
-  # output$fr_bours_dpt <- renderDataTable({DT::datatable(data=head(fr_boursiers_dpt))})
-  # output$fr_bac_acad <- renderDataTable({DT::datatable(data=head(fr_bac_academie))})
+  selected_df <- reactive({
+    DT::datatable(data=head(liste_df[[input$affichage_table]]))
+  })
+  
+  output$table <- renderDataTable({
+    selected_df()
+    # renderDataTable({DT::datatable(data=head(input$affichage_table))})
+  })
+
   
 })

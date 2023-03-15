@@ -113,6 +113,19 @@ fr_bac_academie[,c(2:3)] <- lapply(fr_bac_academie[,c(2:3)],factor)
 summary(fr_bac_academie)
 
 
+liste_df = list("OCDE : Enseignants par élèves"=enseignant_par_eleves,
+                "OCDE : Taux d'obtention d'un diplôme"=taux_obtention_diplome,
+                "France : Indicateur de ségrégation sociale",fr_indicateur_segreg_college,
+                "OCDE : Taux de scolarisation ", taux_scolarisation,
+                "OCDE : Etudiants en mobilité internationale", etud_mobilite,
+                "France : Taux de scolarisation par département", fr_taux_scolarisation_dpt,
+                "France : Taux de scolarisation par région", fr_taux_scolarisation_reg,
+                'France : Réussite par baccalauréat',fr_reussite_bac,
+                "France : Obtention du brevet par établissement", fr_dnb_etablissement,
+                "France : Nombre de boursiers par établissement",fr_boursiers_dpt,
+                "France : Obtention du baccalauréat par académie", fr_bac_academie)
+
+
 ### Importations des fonds de carte ---
 
 # Départements de France

@@ -212,11 +212,12 @@ shinyUI(
         
         tabItem(tabName = "BDD",
                 fluidPage(
-                  radioButtons(inputId = "affichage_table", label = "Choisissez une table à afficher", inline = TRUE,
-                               choices = c("enseignants_eleves", "taux_obtention", "segregation")),
-                  dataTableOutput('enseignants_eleves'),
-                  dataTableOutput('taux_obtention'),
-                  dataTableOutput('segregation')
+                  selectizeInput(inputId = "affichage_table", label = "Choisissez une table à afficher",
+                               choices = names(liste_df)),
+                  dataTableOutput("table")
+                  # dataTableOutput('enseignants_eleves'),
+                  # dataTableOutput('taux_obtention'),
+                  # dataTableOutput('segregation')
                   # dataTableOutput('tx_scolarisation'),
                   # dataTableOutput('mobilite'),
                   # dataTableOutput('fr_scolarisation_dpt'),
