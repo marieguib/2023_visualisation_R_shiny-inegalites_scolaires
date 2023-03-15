@@ -48,13 +48,7 @@ Le système éducatif s'est construit au fil des années et a laissé place à d
 
 ### Conception de l'application
 
-<<<<<<< HEAD
 Nous avons fait le choix de créer une application dashboard en utilisant la structure suivante avec dashboardPage() : - dashboardHeader() - dashboardSidebar() - dashboardBody()
-=======
-Nous avons fait le choix de créer une application dashboard en utilisant
-la structure suivante avec dashboardPage() : - dashboardHeader() -
-dashboardSidebar() - dashboardBody()
->>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 
 En arrivant sur notre site, nous tombons sur la page d'accueil qui
 présente notre sujet, expose certaines grandes lois et quelques
