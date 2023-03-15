@@ -219,20 +219,20 @@ shinyServer(function(input, output) {
 
   
   # Carte taux de réussite DNB par département
-  output$carte_reussite_DNB <- renderPlot({
-     dpt4 <- dpt3 |>
-       filter(Session==input$annee_geo) |>
-       group_by(Session,geometry) |>
-       as_tibble() |>
-       st_as_sf()
-     dpt4
-
-  
-   carte <- ggplot(dpt4)+
-     aes(fill=reussite)+
-     geom_sf()
-   carte
-  })
+  # output$carte_reussite_DNB <- renderPlot({
+  #    dpt4 <- dpt3 |>
+  #      filter(Session==input$annee_geo) |>
+  #      group_by(Session,geometry) |>
+  #      as_tibble() |>
+  #      st_as_sf()
+  #    dpt4
+  # 
+  # 
+  #  carte <- ggplot(dpt4)+
+  #    aes(fill=reussite)+
+  #    geom_sf()
+  #  carte
+  # })
   
   # Carte taux de scolarisation
   # output$taux_scolarisation_FR <- renderPlot({
