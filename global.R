@@ -22,8 +22,7 @@ options(shiny.locale = "fr_FR")
 
 ### Importations des bases de données ---
 
-### PROBLEME A RESOUDRE
-# trouver comment faire : si même année et même pays alors somme des valeurs
+
 enseignant_par_eleves <-  read.csv("data/Enseignant_par_eleves.csv",sep=",",header=TRUE,stringsAsFactor=TRUE)
 enseignant_par_eleves <- enseignant_par_eleves[,c(1,6:7)]
 colnames(enseignant_par_eleves) <- c("LOCATION","TIME","VALUE")
@@ -59,14 +58,12 @@ colnames(fr_indicateur_segreg_college) <- c("annee","nom_academie","dep","nom_de
 fr_indicateur_segreg_college$nom_dep <- as.factor(fr_indicateur_segreg_college$nom_dep)
 summary(fr_indicateur_segreg_college)
 
-### PROBLEME A RESOUDRE
-# trouver comment faire : si même année et même pays alors somme des valeurs
+
 taux_scolarisation <- read.csv("data/Taux_scolarisation_petite_enfance.csv",stringsAsFactors = T)
 taux_scolarisation <- bind_cols(taux_scolarisation[,c(1,6:7)])
 summary(taux_scolarisation)
 
-### PROBLEME A RESOUDRE
-# trouver comment faire : si même année et même pays alors somme des valeurs
+
 etud_mobilite <- read.csv("data/Pct_etudiants_en_mobilite.csv",stringsAsFactors = T)
 etud_mobilite <- bind_cols(etud_mobilite[,c(1,6:7)])
 colnames(etud_mobilite) <- c("LOCATION","TIME","VALUE")
@@ -210,7 +207,7 @@ val_college_PR <- c(mean(fr_indicateur_segreg_college$proportion_tfav_PR),
                     mean(fr_indicateur_segreg_college$proportion_defav_PR))
 
 df <- data.frame(PCS, college_prive=val_college_PR,college_public=val_college_PU)
-comp_college_PU_PR <- amBarplot(x = "PCS", y = c("college_prive", "college_public"),groups_color = c("#87cefa", "#c7158"), legend=TRUE,data = df,main="Comparaison des PCS entre le college prive et public")
+comp_college_PU_PR <- amBarplot(x = "PCS", y = c("college_prive", "college_public"),groups_color = c("#87cefa", "#c7158"), legend=TRUE,data = df,title="Comparaison des PCS entre le collège prive et public")
 
 
 
@@ -236,31 +233,32 @@ voies <- ggplot(df1) +
 
 
 # Carte : Taux de réussite DNB par département 
-# dpt <- sf::read_sf("data/dpt") 
-# # Jointure entre dpt et fr_dnb_etablissement pour récupérer les multipolygons associés aux dpt
-# dpt2 <- merge(x=fr_dnb_etablissement,y=dpt,by.x="Libellé_département",by.y="NOM_DEPT")
-# # VOIR AVEC INNER JOIN
-# dpt3 <- dpt2 |>
-#   select(Session,`Code département`,Inscrits,Admis,geometry) |> 
-#   mutate(reussite = Admis/Inscrits*100)
-# 
-# # Carte : PCS majoritaire selon le département 
+dpt <- sf::read_sf("data/dpt")
+# Jointure entre dpt et fr_dnb_etablissement pour récupérer les multipolygons associés aux dpt
+dpt2 <- merge(x=fr_dnb_etablissement,y=dpt,by.x="Libellé_département",by.y="NOM_DEPT")
+dpt2
+# VOIR AVEC INNER JOIN
+dpt3 <- dpt2 |>
+  select(Session,`Code département`,Inscrits,Admis,geometry) |>
+  mutate(reussite = Admis/Inscrits*100)
+
+# Carte : PCS majoritaire selon le département
 # dpt5 <- merge(x=fr_indicateur_segreg_college,y=dpt,by.x="nom_dep",by.y="NOM_DEPT") #Jointure entre les deux tables
-# # dpt5 <- 
+# dpt5 <-
 
 
 # Carte Taux de scolarisation en france
-# regions <- read_sf("data/regions-20180101-shp/")
-# regions1 <- ms_simplify(regions)
-# regions2 <- merge(x=regions1,y=fr_taux_scolarisation_reg,by.x="code_insee",by.y = "Numero")
-# format(object.size(regions2),units="Mb")
-# 
-# carte_tx_scolarisation <- ggplot(regions2)+geom_sf()+
-#   geom_sf(aes(fill=`Total premier degre`))+
-#   coord_sf(xlim = c(-5.5,10),ylim=c(41,51))+
-#   scale_fill_continuous(low="yellow",high="red")+
-#   labs(title = "Taux de scolarisation (en maternelle et primaire) en France")+
-#   theme_void()
+regions <- read_sf("data/regions-20180101-shp/")
+regions1 <- ms_simplify(regions)
+regions2 <- merge(x=regions1,y=fr_taux_scolarisation_reg,by.x="code_insee",by.y = "Numero")
+format(object.size(regions2),units="Mb")
+
+carte_tx_scolarisation <- ggplot(regions2)+geom_sf()+
+  geom_sf(aes(fill=`Total premier degre`))+
+  coord_sf(xlim = c(-5.5,10),ylim=c(41,51))+
+  scale_fill_continuous(low="yellow",high="red")+
+  labs(title = "Taux de scolarisation (en maternelle et primaire) en France")+
+  theme_void()
 
 
 # # Carte enseignants par élèves : OCDE
@@ -281,12 +279,14 @@ voies <- ggplot(df1) +
 taux_reussite_public <- fr_dnb_etablissement |> 
   select(`Secteur d'enseignement`,Admis,Inscrits) |> 
   filter(`Secteur d'enseignement`=="PUBLIC") |> 
-  summarise(moy_reussite_public = mean(Admis/Inscrits))
+  summarise(moy_reussite_public = round(mean(Admis/Inscrits),3))
+colnames(taux_reussite_public) <- "Collèges publics"
 
 taux_reussite_prive <- fr_dnb_etablissement |> 
   select(`Secteur d'enseignement`,Admis,Inscrits) |> 
   filter(`Secteur d'enseignement`=="PRIVE") |> 
-  summarise(moy_reussite_prive=mean(Admis/Inscrits))
+  summarise(moy_reussite_prive= round(mean(Admis/Inscrits),3))
+colnames(taux_reussite_prive) <- "Collèges privés"
 
 taux_reussite_secteur <- cbind(taux_reussite_prive,taux_reussite_public)
 taux_reussite_secteur

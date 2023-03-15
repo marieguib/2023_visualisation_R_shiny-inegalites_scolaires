@@ -113,24 +113,42 @@ shinyUI(
                                valueBoxOutput("bac_sans_emploi") ,
                                valueBoxOutput("bac_cadre")
                              ) ,
+                             fluidRow(style="margin:6px;",
                              withSpinner(
                               plotOutput("treemap_college"),
-                              type = 1),
-                          withSpinner(
-                            plotOutput("camembert_lycee"),
-                            type = 1),
-                          withSpinner(
-                            plotOutput("reussite_bac_PCS"),
-                            type = 1)
+                              type = 1)),
+                             fluidRow(style="margin:6px;",
+                                      withSpinner(
+                                        plotOutput("camembert_lycee"),
+                                        type = 1)),
+                             # Modifier la mise en page de ce graphique : 
+                             fluidRow(style="margin:6px;",
+                               withSpinner(
+                                 plotOutput("reussite_bac_PCS"),
+                                 type = 1))
+                             # J ARRIVE PAS A L AFFICHER : je vais voir ça plus tard
+                             # fluidRow(
+                             #   p("Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement."),
+                             #   p("Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée.")
+                             # )
+
+                             
                           ),
                     tabPanel("Privé ou public ?",
                              style='margin:6px;',
+                             h1("L'impact du privé et du public sur la scolarité"),
+                             
+                             h2("Taux de réussite au Diplôme National du Brevet"),
+                             fluidRow(style="margin:6px;",
                              withSpinner(
                                dataTableOutput("reussite_secteur"),
-                               type = 1),
+                               type = 1)),
+                             
+                             h2("Professions et Catégories Sociales selon le secteur d'enseignement"),
+                             fluidRow(style="margin:6px;",
                              withSpinner(
                                amChartsOutput("amchartComparaisonPCS"),
-                               type = 1)
+                               type = 1))
                     )
                   )
                   )
@@ -156,25 +174,29 @@ shinyUI(
                                      type = 1)
                                )),
 
-                               box(title = "Carte du nombre d'élèves",
+                               box(title = "Carte du nombre d'élèves",status = "primary",width ="50000px",solidheader = TRUE,
                                    radioButtons(inputId="annee_carte",label = "Choisissez une année :",choices=c(2014,2015,2016,2017,2018,2019,2020,2021)),
                                    fluidRow(style="margin:6px;")
                                    # plotOutput("carte_evol_enseignant")
                                )
                     ),
                     tabPanel("Taux de réussite DNB par département",
+                             fluidRow(style="margin:6px;",
                              radioButtons(inputId="annee_geo",label = "Choisissez une année",inline = TRUE,choices=c(2014,2015,2016,2017,2018,2019,2020,2021)),
                              withSpinner(
                                plotOutput("carte_reussite_DNB"),
-                               type = 1)
+                               type = 1))
                     ),
                     
-                    # tabPanel("Taux de scolarisation en France",
-                    #          box(title="Carte du taux de scolarisation en France",
-                    #              withSpinner(
-                    #                plotOutput("taux_scolarisation_FR"),
-                    #                type = 1))
-                    # ),
+                    tabPanel("Taux de scolarisation en France",
+                             fluidRow(style="margin:6px;",
+                             h2("Taux de scolarisation selon les régions en France"),
+                             box(status = "primary",width ="50000px",solidheader = TRUE, 
+                             withSpinner(
+                               plotOutput("taux_scolarisation_FR"),
+                               type = 1))
+                             )
+                    ),
                     
                     tabPanel("Etudiants en mobilité internationale",
                              selectizeInput("Pays_mobilite",label="Pays",
@@ -197,8 +219,8 @@ shinyUI(
                 fluidPage(
                   tabsetPanel(
                     tabPanel("Répartition des bacs",
-                             fluidRow(style='margin:3px;'),
-                             box(title="Répartition des bacs",status = "primary",width ="50000px",solidheader = TRUE, 
+                             fluidRow(style='margin:6px;'),
+                             box(title = "Répartition des baccalauréats selon le genre des élèves",status = "primary",width ="50000px",solidheader = TRUE, 
                                  withSpinner(
                                    plotOutput("repartition_bac"),
                                    type = 1))
@@ -210,14 +232,14 @@ shinyUI(
         
         ### Sources 
         
+        # A MODIFIER A PARTIR D'ICI !!!!
         tabItem(tabName = "BDD",
                 fluidPage(
-                  selectizeInput(inputId = "affichage_table", label = "Choisissez une table à afficher",
-                               choices = names(liste_df)),
-                  dataTableOutput("table")
-                  # dataTableOutput('enseignants_eleves'),
-                  # dataTableOutput('taux_obtention'),
-                  # dataTableOutput('segregation')
+                  radioButtons(inputId = "affichage_table", label = "Choisissez une table à afficher", inline = TRUE,
+                               choices = c("enseignants_eleves", "taux_obtention", "segregation")),
+                  dataTableOutput('enseignants_eleves'),
+                  dataTableOutput('taux_obtention'),
+                  dataTableOutput('segregation')
                   # dataTableOutput('tx_scolarisation'),
                   # dataTableOutput('mobilite'),
                   # dataTableOutput('fr_scolarisation_dpt'),

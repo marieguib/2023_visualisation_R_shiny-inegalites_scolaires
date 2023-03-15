@@ -79,7 +79,7 @@ shinyServer(function(input, output) {
     valueBox(
       paste(baccalaureat,"%"),
       subtitle = " d'admis au baccalauréat quelque soit la classe sociale",
-      icon = icon('diploma'),
+      icon = icon('graduation-cap'),
       color = "green"
     )
   })
@@ -88,7 +88,7 @@ shinyServer(function(input, output) {
     valueBox(
       paste(round(baccalaureat_sans_emploi$Pct_admis_baccalaureat),"%"),
       subtitle = "d'admis au baccalauréat avec des parents sans activite professionnelle",
-      icon = icon('diploma'),
+      icon = icon('graduation-cap'),
       color = "red"
     )
   })
@@ -97,7 +97,7 @@ shinyServer(function(input, output) {
     valueBox(
       paste(round(baccalaureat_cadre$Pct_admis_baccalaureat),"%"),
       subtitle = "d'admis au baccalauréat avec des parents cadres ou en professions intellectuelles supérieures",
-      icon = icon('diploma'),
+      icon = icon('graduation-cap'),
       color = "green"
     )
   })
@@ -175,7 +175,6 @@ shinyServer(function(input, output) {
   })
   
   # Carte du nombre d'enseignant par élèves
-  # merge world et enseignant par eleve
   # output$carte_evol_enseignant <- renderLeaflet({
   #   
   #   # INTRODUIRE UN REACTIVE
@@ -219,25 +218,25 @@ shinyServer(function(input, output) {
 
   
   # Carte taux de réussite DNB par département
-  # output$carte_reussite_DNB <- renderPlot({
-  #    dpt4 <- dpt3 |>
-  #      filter(Session==input$annee_geo) |>
-  #      group_by(Session,geometry) |>
-  #      as_tibble() |>
-  #      st_as_sf()
-  #    dpt4
-  # 
-  # 
-  #  carte <- ggplot(dpt4)+
-  #    aes(fill=reussite)+
-  #    geom_sf()
-  #  carte
-  # })
+  output$carte_reussite_DNB <- renderPlot({
+     dpt4 <- dpt3 |>
+       filter(Session==input$annee_geo) |>
+       group_by(Session,geometry) |>
+       as_tibble() |>
+       st_as_sf()
+     dpt4
+
+
+   carte <- ggplot(dpt4)+
+     aes(fill=reussite)+
+     geom_sf()
+   carte
+  })
   
   # Carte taux de scolarisation
-  # output$taux_scolarisation_FR <- renderPlot({
-  #   carte_tx_scolarisation
-  # })
+  output$taux_scolarisation_FR <- renderPlot({
+    carte_tx_scolarisation
+  })
   
   
   # Etudiants en mobilite internationale
@@ -265,7 +264,6 @@ shinyServer(function(input, output) {
   
   output$table <- renderDataTable({
     selected_df()
-    # renderDataTable({DT::datatable(data=head(input$affichage_table))})
   })
 
   

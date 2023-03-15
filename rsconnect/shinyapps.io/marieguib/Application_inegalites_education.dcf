@@ -5,10 +5,10 @@ account: marieguib
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8575955
-bundleId: 6961531
+bundleId: 6961743
 url: https://marieguib.shinyapps.io/Application_inegalites_education/
-when: 1678893711.19288
-lastSyncTime: 1678893711.1929
+when: 1678896287.13698
+lastSyncTime: 1678896287.13702
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: Resume_application_education.pdf|Resume_application_education.Rmd

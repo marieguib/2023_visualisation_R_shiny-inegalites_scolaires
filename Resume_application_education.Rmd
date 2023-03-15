@@ -58,9 +58,9 @@ sociales au collège.
 Afin d'avoir une application claire et facile d'utilisation, nous avons
 fait le choix de créer une application sous format de tableau de bord.
 Le package dashboard nous permet d'utiliser cette mise en page avec
-dashboardPage() contenant : \
- - dashboardHeader() \
-- dashboardSidebar() \
+dashboardPage() contenant :\
+- dashboardHeader()\
+- dashboardSidebar()\
 - dashboardBody()
 
 Lors de l'ouverture de notre site, la page d'accueil présente notre
