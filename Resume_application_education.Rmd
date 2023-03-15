@@ -62,39 +62,21 @@ onglets : un onglet sur les inégalités sociales, un onglet sur les
 inégalités territoriales et un onglet sur les inégalités de genre dans
 l'éducation.
 
-<<<<<<< HEAD
 Enfin, un dernier onglet comporte nos bases de données pour préciser nos sources.
-=======
-Enfin, un dernier onglet comporte nos bases de données pour préciser nos
-sources.
->>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
+
 
 -   techniques utilisées : dashboard
 -   Expliquer comment est construit l'app
 
 ### Interface utilisateur
 
-<<<<<<< HEAD
+
 Notre objectif était de construire une application interactive, facile d'utilisation, ergonomique et esthétique, pour que l'utilisateur "comprennent bien" les enjeux du sujet. Pour cela, nous avons utilisé different package.
-=======
-Notre objectif était de construire une application interactive, facile
-d'utilisation, ergonomique et esthétique, pour que l'utilisateur
-"comprennent bien" les enjeux du sujet. Pour cela, nous avons utilisé
-different package.
->>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 
 [Pour la programmation R]{.underline}:
 
-<<<<<<< HEAD
 -   library(tidyverse) : inclut de nombreux packages R tels que dplyr, ggplot2, tidyr, readr, forcats, purrr et d'autres encore. Ce package permet donc de filtrer, trier, sélectionner et agréger des données, de nettoyer et mettre en forme des donnéesréer des graphiques personnalisés et des visualisations.
-=======
--   package tidyverse : inclut de nombreux packages R tels que dplyr,
-    ggplot2, tidyr, readr, forcats, purrr et d'autres encore. Ce package
-    permet donc de filtrer, trier, sélectionner et agréger des données,
-    de nettoyer et mettre en forme des données
 
-[Pour la visualisation des données]{.underline} :
->>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
 
 -   package ggplot : créer des graphiques personnalisés et des
     visualisations.
@@ -123,11 +105,6 @@ different package.
 -   facilité d'utilisation
 
 -   ergonomie
-<<<<<<< HEAD
-
-=======
->>>>>>> 7239062a3d087fe1aebf105e32f07080f03dd392
--   Différents package utilisé
 
 ### Exemples de graphiques (titres à modifier)
 
