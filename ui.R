@@ -142,17 +142,21 @@ shinyUI(
                                    radioButtons(inputId="annee_carte",label = "Choisissez une année :",choices=c(2014,2015,2016,2017,2018,2019,2020,2021)),
                                    fluidRow(style="margin:6px;")
                                    # plotOutput("carte_evol_enseignant")
-                               ),
-                             fluidRow(
-                               box(title="Taux de reussite")
-                             )
+                               )
                     ),
                     tabPanel("Taux de réussite DNB par département",
                              radioButtons(inputId="annee_geo",label = "Choisissez une année",inline = TRUE,choices=c(2014,2015,2016,2017,2018,2019,2020,2021)),
                              withSpinner(
-                               plotOutput("carte_tx_reussite"),
+                               plotOutput("carte_reussite_DNB"),
                                type = 1)
                     ),
+                    
+                    # tabPanel("Taux de scolarisation en France",
+                    #          box(title="Carte du taux de scolarisation en France",
+                    #              withSpinner(
+                    #                plotOutput("taux_scolarisation_FR"),
+                    #                type = 1))
+                    # ),
                     
                     tabPanel("Mobilité des jeunes",
                              selectizeInput("Pays_mobilite",label="Pays",
@@ -163,12 +167,6 @@ shinyUI(
                                plotOutput("mobilite"),
                                type = 1)
                     )
-                    # tabPanel("Taux de scolarisation en France",
-                    #          box(title="Carte du taux de scolarisation en France",
-                    #              withSpinner(
-                    #                plotOutput("taux_scolarisation_FR"),
-                    #                type = 1))
-                    # )
                   )
                 )),
         

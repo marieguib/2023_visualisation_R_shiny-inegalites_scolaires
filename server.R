@@ -130,41 +130,19 @@ shinyServer(function(input, output) {
   
 
   ### Inegalités territoriales
-
-  # Carte taux de réussite DNB par département
-  # output$taux_scolarisation_FR <- renderPlot({
-  #   carte_tx_scolarisation
-  # })
   
-  # Carte taux de réussite DNB par département
-  output$carte_tx_reussite <- renderPlot({
-     dpt4 <- dpt3 |>
-       filter(Session==input$annee_geo) |>
-       group_by(Session,geometry) |>
-       as_tibble() |>
-       st_as_sf()
-     dpt4
-
-  
-   carte <- ggplot(dpt4)+
-     aes(fill=reussite)+
-     geom_sf()
-   carte
-  })
-  
-
   # Evolution du nombre d'enseignants par élèves
   output$evol_enseignant_eleves <- renderPlot({
     d <- enseignant_par_eleves |>
       filter(LOCATION==input$Pays_mobilite) |>
       group_by(TIME) |>
       mutate(nb_moy = mean(VALUE))
-
+    
     m <- ggplot(d)+
       aes(x=TIME,y=nb_moy)+
       geom_line()
     m
-
+    
   })
   
   # Carte du nombre d'enseignant par élèves
@@ -210,6 +188,29 @@ shinyServer(function(input, output) {
   #                        
   # })
 
+  
+  # Carte taux de réussite DNB par département
+  output$carte_reussite_DNB <- renderPlot({
+     dpt4 <- dpt3 |>
+       filter(Session==input$annee_geo) |>
+       group_by(Session,geometry) |>
+       as_tibble() |>
+       st_as_sf()
+     dpt4
+
+  
+   carte <- ggplot(dpt4)+
+     aes(fill=reussite)+
+     geom_sf()
+   carte
+  })
+  
+  # Carte taux de scolarisation
+  # output$taux_scolarisation_FR <- renderPlot({
+  #   carte_tx_scolarisation
+  # })
+  
+  
   # Etudiants en mobilite internationale
   output$mobilite <- renderPlot({
     ggplot(etud_mobilite)+
