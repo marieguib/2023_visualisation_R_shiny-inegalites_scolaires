@@ -1,0 +1,14 @@
+name: Projet_visualisation
+title: Projet_visualisation
+username:
+account: clemchsns
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8588367
+bundleId: 6967379
+url: https://clemchsns.shinyapps.io/Projet_visualisation/
+when: 1678987722.84914
+lastSyncTime: 1678987722.84915
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Resume_application_education.pdf|Resume_application_education.Rmd
