@@ -143,6 +143,9 @@ shinyServer(function(input, output) {
     comp_college_PU_PR
   })
   
+  # Commentaire amchartComparaisonPCS
+  output$comm_amchartComparaisonPCS <- renderText({commg_amchartComparaisonPCS})
+  
   # Table reussite DNB selon le secteur privé / public 
   output$reussite_secteur <- renderDataTable({
     taux_reussite_secteur
@@ -157,9 +160,6 @@ shinyServer(function(input, output) {
       geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat professionnel`),col="black")
   })
   
-  
-# Commentaire reussite_bac_PCS
-output$comm_reussite_bac_PCS <- renderText({commg_reussite_bac_PCS})
 
 
   ### Inegalités territoriales

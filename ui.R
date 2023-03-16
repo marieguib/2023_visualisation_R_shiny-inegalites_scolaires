@@ -125,10 +125,7 @@ shinyUI(
                              fluidRow(style="margin:6px;",
                                withSpinner(
                                  plotOutput("reussite_bac_PCS"),
-                                 type = 1)),
-                             fluidRow(
-                               verbatimTextOutput("comm_reussite_bac_PCS")
-                             )
+                                 type = 1))
 
                              
                           ),
@@ -146,7 +143,10 @@ shinyUI(
                              fluidRow(style="margin:6px;",
                              withSpinner(
                                amChartsOutput("amchartComparaisonPCS"),
-                               type = 1))
+                               type = 1)),
+                             fluidRow(
+                               verbatimTextOutput("comm_amchartComparaisonPCS")
+                             )
                     )
                   )
                   )

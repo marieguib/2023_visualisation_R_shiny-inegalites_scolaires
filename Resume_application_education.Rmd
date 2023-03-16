@@ -19,70 +19,78 @@ L'éducation représente "l'art de former une personne en développant ses
 capacités physiques, intellectuelles et morales, de façon à lui
 permettre d'affronter sa vie personnelle et sociale avec une
 personnalité suffisamment épanouie". C'est donc un élément majeur dans
-le développement économique et social d'un pays. Cependant, de
-nombreuses inégalités existent entre eux dans ce domaine. Ces disparités
-se traduisent par différents exemples comme l'inégalité d'accès face à
-l'éducation, les écarts de niveaux de vie entre les pays mais aussi
-entre les familles. Elles peuvent donc avoir des conséquences néfastes
-sur la vie des individus.\
+le développement économique et social d'un pays. Dans notre société,
+l'éducation est considérée comme un outil clé pour briser les barrières
+sociales et économiques. Cependant, de nombreuses inégalités existent
+entre les individus dans ce domaine. Ces disparités se traduisent par
+différents exemples comme l'inégalité d'accès face à l'éducation, les
+écarts de niveaux de vie entre les pays mais aussi entre les familles.
+Elles peuvent donc avoir des conséquences néfastes sur la vie des
+individus.\
 Ainsi, nous avons choisi d'étudier les causes et les conséquences des
 inégalités dans le domaine de l'éducation.\
 Notre objectif étant de mieux comprendre les enjeux et les défis des
-différents systèmes éducatifs des pays de l'OCDE (et plus
-particulièrement en France). Notre application est principalement conçue
-pour observer ces inégalités et leurs évolutions entre 2014 et 2021.
-
--   choix du sujet
--   quel objectif
--   pourquoi l'application sera utilisée
+différents systèmes éducatifs des pays de Organisation de coopération et
+de développement économique (OCDE), et plus particulièrement, en France.
+Notre application est principalement conçue pour observer ces inégalités
+et leurs évolutions entre 2014 et 2021.
 
 ## L'application
 
-### Principales fonctionnalités de notre application
+Au fil des années, le système éducatif s'est construit et a été l'objet
+de nombreux changements et améliorations. Par exemple, l'accès à l'école
+pour les milieux défavorisés et pour les femmes. montrent un progrès
+significatif dans ce domaine. Notre application a pour but de montrer
+ces évolutions dans le domaine de l'éducation. Dans notre cas, nous nous
+sommes concentrées sur des pays globalement assez développés puisqu'ils
+font partis de l'OCDE. Nos analyses ne sont donc pas exhaustives et ne
+sont pas représentatives de tous les pays du monde. Cependant, elles
+permettent aussi de se rendre compte de différences entre les individus
+selon leurs origines dans le système scolaire.
 
-Le système éducatif s'est construit au fil des années et a laissé place
-à des améliorations, notamment l'accès à l'école pour les milieux
-défavorisés et pour les femmes. Cependant, de nombreuses inégalités
-persistent. Notre application a pour but de montrer ces évolutions dans
-le domaine de l'éducation. L'utilisateur a donc la possibilité de
-sélectionner le pays dont il souhaite visualiser cette évolution. Il
-peut aussi sélectionner une année afin d'analyser les changements dans
-différents domaines comme par exemple, la répartition des classes
-sociales au collège.
+Tout d'abord, l'idée générale de l'application est d'être interactive et
+ludique. L'utilisateur peut donc l'explorer grâce à différents onglets
+et peut choisir de se focaliser sur un pays ou une période donnée. Il a
+la possibilité de sélectionner le pays sur lequel il souhaite en savoir
+davantage. Il peut aussi sélectionner une année afin d'analyser les
+changements dans différents secteurs du système éducatif. Grâce aux
+différents sélecteurs, l'utilisateur peut analyser les évolutions sur
+une année ou un lieu bien précis.
 
--   évolutions dans le domaine de l'éducation
--   exemples =\> choix années / pays
-
-### Conception de l'application
-
-Afin d'avoir une application claire et facile d'utilisation, nous avons
-fait le choix de créer une application sous format de tableau de bord.
-Le package dashboard nous permet d'utiliser cette mise en page avec
-dashboardPage() contenant :\
+Ensuite, afin d'avoir une application claire et facile d'utilisation,
+nous avons fait le choix de créer une application sous format de tableau
+de bord. Le package dashboard nous permet d'utiliser cette mise en page
+avec dashboardPage() contenant :\
 - dashboardHeader()\
 - dashboardSidebar()\
 - dashboardBody()
 
-Lors de l'ouverture de notre site, la page d'accueil présente notre
-sujet, expose certaines grandes lois et des personnalités ayant marqué
-l'histoire de l'éducation dans différents pays de l'OCDE (Organisation
-de coopération et de développement économique).
+Lors de l'ouverture de notre site, la page d'accueil présente
+globalement notre sujet, expose certaines grandes lois et personnalités
+ayant marqué l'histoire de l'éducation dans différents pays de l'OCDE.
+Elle est assez simple mais permet à l'utilisateur d'entrer dans notre
+application progressivement. Elle présente et définit les notions clés
+de notre projet.
 
-Puisque notre sujet traite des inégalités dans le mileu scolaire, nous
-avons souhaité les examiner dans différents onglets. Par conséquent, le
-menu déroulant comprenant la page d'accueil, trois onglets au sujet des
-inégalités socio-économiques, territoriales et de genre dans l'éducation
-et une dernière page regroupant les sources et bases de données.
+SCREEN DE LA PAGE D'ACCUEIL
 
--   techniques utilisées : dashboard
--   Expliquer comment est construit l'app
+SCREEN PAGE ACCUEIL + MENU DEROULANT ? =\> permet de ne faire qu'un seul
+screen
 
-### Interface utilisateur
+Notre sujet traitant de diverses inégalités dans le milieu scolaire,
+nous avons souhaité les examiner dans différents onglets. La mise en
+place d'un menu permet d'organiser notre application. En effet, celui-ci
+comprend la page d'accueil, trois pages au sujet des inégalités
+socio-économiques, territoriales et de genre dans l'éducation et une
+dernière regroupant les sources et bases de données.
 
-Notre objectif était de construire une application interactive,
-ergonomique et esthétique, pour que l'utilisateur saisisse les enjeux
-fondamentaux de notre sujet. Nous avons donc utilisé différents packages
-pour parvenir à nos fins.
+SCREEN DU MENU DEROULANT ?
+
+Lors de notre projet, l'esthétique et l'ergonomie de notre application
+ont été primordiale puisqu'elle permet à l'utilisateur d'explorer plus
+facilement et pour qu'il saisisse les enjeux fondamentaux de notre
+sujet. Nous avons donc utilisé différents packages pour parvenir à nos
+fins.
 
 [Pour la programmation R]{.underline} :
 
@@ -114,10 +122,6 @@ pour parvenir à nos fins.
 -   package shinythemes
 
 <!-- -->
-
--   facilité d'utilisation
-
--   ergonomie
 
 ### Exemples de graphiques (titres à modifier)
 
