@@ -27,7 +27,7 @@ enseignant_par_eleves <-  read.csv("data/Enseignant_par_eleves.csv",sep=",",head
 enseignant_par_eleves <- enseignant_par_eleves[,c(1,6:7)]
 colnames(enseignant_par_eleves) <- c("LOCATION","TIME","VALUE")
 enseignant_par_eleves <- enseignant_par_eleves |> 
-  filter(TIME>=2014,TIME<=2021)
+  dplyr::filter(TIME>=2014,TIME<=2021)
 enseignant_par_eleves$ACRONYME_PAYS <- enseignant_par_eleves$LOCATION
 enseignant_par_eleves$ACRONYME_PAYS <- as.factor(enseignant_par_eleves$ACRONYME_PAYS)
 enseignant_par_eleves$LOCATION <- as.factor(enseignant_par_eleves$LOCATION)
@@ -40,35 +40,34 @@ taux_obtention_diplome <- read.csv("data/Taux_obtention_diplome.csv",sep=",",hea
 taux_obtention_diplome <- taux_obtention_diplome[,c(2,4,6,8:9,12,15,17)]
 taux_obtention_diplome <- na.omit(taux_obtention_diplome)
 taux_obtention_diplome <- taux_obtention_diplome |> 
-  filter(YEAR>=2014,YEAR<=2021) |> 
-  filter(Indicateur == "Taux d’obtention d’un diplôme")
+  dplyr::filter(YEAR>=2014,YEAR<=2021) |> 
+  dplyr::filter(Indicateur == "Taux d’obtention d’un diplôme")
 summary(taux_obtention_diplome)
 
-### SUPPRIMER LES COLONNES INUTILES : CLEMENCE
+
 fr_indicateur_segreg_college <- read.csv("data/Fr_indicateur_segregation_sociale_colleges.csv",sep=";",dec=".",header=TRUE,stringsAsFactor=TRUE)
-fr_indicateur_segreg_college <- fr_indicateur_segreg_college[,c(2,4:29)]
+fr_indicateur_segreg_college <- fr_indicateur_segreg_college[,c(2,4:6,8,9,11:25,27,28)]
 colnames(fr_indicateur_segreg_college) <- c("annee","nom_academie","dep","nom_dep",
-                                            "nb_college","nb_college_PU","nb_college_PR",
-                                            "poids_college_PR_calcul","proportion_tfav",
-                                            "proportion_fav","proportion_moy","proportion_defav",
+                                            "nb_college_PU","nb_college_PR",
+                                            "proportion_tfav","proportion_fav","proportion_moy","proportion_defav",
                                             "proportion_tfav_PU","proportion_fav_PU","proportion_moy_PU","proportion_defav_PU",
                                             "proportion_tfav_PR","proportion_fav_PR","proportion_moy_PR","proportion_defav_PR",
-                                            "indice_entropie_total","indice_entropie_PU","indice_entropie_PR","indice_entropie_inter_PU_PR",
-                                            "contrib_college_PU","contrib_college_PR","contrib_inter_PU_PR")
+                                            "indice_entropie_total","indice_entropie_PU","indice_entropie_PR",
+                                            "contrib_college_PU","contrib_college_PR")
 fr_indicateur_segreg_college$nom_dep <- as.factor(fr_indicateur_segreg_college$nom_dep)
 summary(fr_indicateur_segreg_college)
 
 
-taux_scolarisation <- read.csv("data/Taux_scolarisation_petite_enfance.csv",stringsAsFactors = T)
+taux_scolarisation <- read.csv("data/Taux_scolarisation_petite_enfance.csv",sep=",",header=TRUE,dec=".",stringsAsFactors = T)
 taux_scolarisation <- bind_cols(taux_scolarisation[,c(1,6:7)])
 summary(taux_scolarisation)
 
 
-etud_mobilite <- read.csv("data/Pct_etudiants_en_mobilite.csv",stringsAsFactors = T)
+etud_mobilite <- read.csv("data/Pct_etudiants_en_mobilite.csv",sep=",",header=TRUE,dec=".",stringsAsFactors = T)
 etud_mobilite <- bind_cols(etud_mobilite[,c(1,6:7)])
 colnames(etud_mobilite) <- c("LOCATION","TIME","VALUE")
 etud_mobilite <- etud_mobilite |> 
-  filter(TIME>=2014,TIME<=2021)
+  dplyr::filter(TIME>=2014,TIME<=2021)
 summary(etud_mobilite)
 
 
@@ -83,10 +82,10 @@ fr_taux_scolarisation_reg$Region <- factor(fr_taux_scolarisation_reg$Region)
 summary(fr_taux_scolarisation_reg)
 
 # PENSER A SUPPRIMER LES PCS AVEC DONT
-fr_reussite_bac <- read_delim("data/Fr-reussite_bac_origine_sociale.csv",show_col_types = FALSE)
+fr_reussite_bac <- read_delim("data/Fr-reussite_bac_origine_sociale.csv",delim=";",show_col_types = FALSE)
 fr_reussite_bac$Origine_sociale <- factor(fr_reussite_bac$Origine_sociale)
 fr_reussite_bac <- fr_reussite_bac|> 
-  filter(Annee>=2014,Annee<=2021) 
+  dplyr::filter(Annee>=2014,Annee<=2021) 
 summary(fr_reussite_bac)
 
 
@@ -94,7 +93,7 @@ fr_dnb_etablissement <- read_delim("data/Fr-dnb-par-etablissement.csv",delim=";"
 fr_dnb_etablissement <- fr_dnb_etablissement[,c(1,3,5,8:9,12:20)]
 fr_dnb_etablissement[,c(2:7)] <- lapply(fr_dnb_etablissement[,c(2:7)],factor)
 fr_dnb_etablissement <- fr_dnb_etablissement|> 
-  filter(Session>=2014,Session<=2021)
+  dplyr::filter(Session>=2014,Session<=2021)
 summary(fr_dnb_etablissement)
 
 
@@ -278,13 +277,13 @@ carte_tx_scolarisation <- ggplot(regions2)+geom_sf()+
 # Taux de réussite DNB selon le secteur (etablissement)
 taux_reussite_public <- fr_dnb_etablissement |> 
   select(`Secteur d'enseignement`,Admis,Inscrits) |> 
-  filter(`Secteur d'enseignement`=="PUBLIC") |> 
+  dplyr::filter(`Secteur d'enseignement`=="PUBLIC") |> 
   summarise(moy_reussite_public = round(mean(Admis/Inscrits),3))
 colnames(taux_reussite_public) <- "Collèges publics"
 
 taux_reussite_prive <- fr_dnb_etablissement |> 
   select(`Secteur d'enseignement`,Admis,Inscrits) |> 
-  filter(`Secteur d'enseignement`=="PRIVE") |> 
+  dplyr::filter(`Secteur d'enseignement`=="PRIVE") |> 
   summarise(moy_reussite_prive= round(mean(Admis/Inscrits),3))
 colnames(taux_reussite_prive) <- "Collèges privés"
 
@@ -297,17 +296,17 @@ df_PCS <- data.frame(
   value = aggregate(`Pourcentage d'admis au baccalaureat`~ Origine_sociale,data=fr_reussite_bac,mean)
 )
 colnames(df_PCS) <- c("Origine_sociale","Pct_admis_baccalaureat")
-df_PCS <- df_PCS |> filter(Origine_sociale!="Ensemble")
+df_PCS <- df_PCS |> dplyr::filter(Origine_sociale!="Ensemble")
 df_PCS
 
 
 # Values-Box 
 baccalaureat_cadre <- df_PCS |> 
-  filter(Origine_sociale=='Cadres, professions intellectuelles superieures')
+  dplyr::filter(Origine_sociale=='Cadres, professions intellectuelles superieures')
 baccalaureat_cadre
 
 baccalaureat_sans_emploi <-df_PCS |> 
-  filter(Origine_sociale=='Autres personnes sans activite professionnelle')
+  dplyr::filter(Origine_sociale=='Autres personnes sans activite professionnelle')
 baccalaureat_sans_emploi
   
 baccalaureat <- round(sum(df_PCS$Pct_admis_baccalaureat)/nrow(df_PCS))
@@ -316,8 +315,11 @@ baccalaureat
 
 # Commentaires graphiques ---
 
+# Reussite bac selon PCS au lycee
+commg_reussite_bac_PCS <- "Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement.
+Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée."
+
+
 # Reussite bac selon PCS selon secteur au college
 commg_amchartComparaisonPCS <- HTML("Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement.
 Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée.")
-
-

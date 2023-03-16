@@ -51,24 +51,24 @@ shinyServer(function(input, output) {
   ## Image personnages important
   
   output$Jules_FERRY <- renderImage({
-    list(src="data/jules_FERRY.jpg",alt="Jules_FERRY",width=300,height=400,style='position : relative')
+    list(src="www/jules_FERRY.jpg",alt="Jules_FERRY",width=300,height=400,style='position : relative')
   },deleteFile=FALSE)
   
   
   output$Martin_LUTHER <- renderImage({
-    list(src="data/Martin_LUTHER.jpg",alt="Martin_LUTHER",width=300,height=400,style='position : relative')
+    list(src="www/Martin_LUTHER.jpg",alt="Martin_LUTHER",width=300,height=400,style='position : relative')
   },deleteFile=FALSE)
   
   output$Mustafa_Kemal_Atatürk <- renderImage({
-    list(src="data/Mustafa_Kemal_Atatürk.jpg",alt="Mustafa_Kemal_Atatürk",width=300,height=400,style='position : relative')
+    list(src="www/Mustafa_Kemal_Atatürk.jpg",alt="Mustafa_Kemal_Atatürk",width=300,height=400,style='position : relative')
   },deleteFile=FALSE)
   
   output$Francisco_Giner_de_los_Ríos <- renderImage({
-    list(src="data/Francisco_Giner_de_los_Ríos.jpg",alt="Francisco_Giner_de_los_Ríos",width=300,height=400,style='position : relative')
+    list(src="www/Francisco_Giner_de_los_Ríos.jpg",alt="Francisco_Giner_de_los_Ríos",width=300,height=400,style='position : relative')
   },deleteFile=FALSE)
   
   output$Mori_Arinori <- renderImage({
-    list(src="data/Mori_Arinori.jpg",alt="Mori_Arinori",width=300,height=400,style='position : relative')
+    list(src="www/Mori_Arinori.jpg",alt="Mori_Arinori",width=300,height=400,style='position : relative')
   },deleteFile=FALSE)
   
   
@@ -153,7 +153,7 @@ shinyServer(function(input, output) {
   
   # Reussite bac selon PCS au lycee
   output$reussite_bac_PCS <- renderPlot({
-    fr_reussite_bac |> filter(Origine_sociale==input$origine_sociale) |> 
+    fr_reussite_bac |> dplyr::filter(Origine_sociale==input$origine_sociale) |> 
       ggplot()+
       geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat general`),col="red")+
       geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat technologique`),col="blue")+
@@ -167,7 +167,7 @@ shinyServer(function(input, output) {
   # Evolution du nombre d'enseignants par élèves
   output$evol_enseignant_eleves <- renderPlot({
     d <- enseignant_par_eleves |>
-      filter(LOCATION==input$Pays_mobilite) |>
+      dplyr::filter(LOCATION==input$Pays_mobilite) |>
       group_by(TIME) |>
       mutate(nb_moy = mean(VALUE))
     
@@ -183,14 +183,14 @@ shinyServer(function(input, output) {
   #   
   #   # INTRODUIRE UN REACTIVE
   #   enseignant_par_eleves <- enseignant_par_eleves |> 
-  #     filter(LOCATION==input$Pays_mobilite) |> 
+  #     dplyr::filter(LOCATION==input$Pays_mobilite) |> 
   #     group_by(TIME) |> 
   #     mutate(nb_moy = mean(VALUE))
   #   
   #   world2 <- merge(x=world,y=enseignant_par_eleves,by.x="sov_a3",by.y="ACRONYME_PAYS")
   #   
   #   world3 <- world2 |> 
-  #     filter(TIME==input$annee_carte)
+  #     dplyr::filter(TIME==input$annee_carte)
   #   
   #   coords <- st_coordinates(world3)
   #   longitude <- coords[,"X"]
@@ -224,7 +224,7 @@ shinyServer(function(input, output) {
   # Carte taux de réussite DNB par département
   output$carte_reussite_DNB <- renderPlot({
      dpt4 <- dpt3 |>
-       filter(Session==input$annee_geo) |>
+       dplyr::filter(Session==input$annee_geo) |>
        group_by(Session,geometry) |>
        as_tibble() |>
        st_as_sf()

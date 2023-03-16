@@ -5,10 +5,10 @@ account: clemchsns
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8588367
-bundleId: 6967539
+bundleId: 6968310
 url: https://clemchsns.shinyapps.io/Projet_visualisation/
-when: 1678989711.72436
-lastSyncTime: 1678989711.72441
+when: 1679000707.9298
+lastSyncTime: 1679000707.92981
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: Resume_application_education.pdf|Resume_application_education.Rmd
