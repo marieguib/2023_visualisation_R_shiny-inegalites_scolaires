@@ -312,3 +312,12 @@ baccalaureat_sans_emploi
   
 baccalaureat <- round(sum(df_PCS$Pct_admis_baccalaureat)/nrow(df_PCS))
 baccalaureat
+
+
+# Commentaires graphiques ---
+
+# Reussite bac selon PCS au lycee
+commg_reussite_bac_PCS <- "Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement.
+Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée."
+
+

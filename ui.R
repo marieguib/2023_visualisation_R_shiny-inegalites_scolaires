@@ -125,12 +125,10 @@ shinyUI(
                              fluidRow(style="margin:6px;",
                                withSpinner(
                                  plotOutput("reussite_bac_PCS"),
-                                 type = 1))
-                             # J ARRIVE PAS A L AFFICHER : je vais voir ça plus tard
-                             # fluidRow(
-                             #   p("Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement."),
-                             #   p("Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée.")
-                             # )
+                                 type = 1)),
+                             fluidRow(
+                               verbatimTextOutput("comm_reussite_bac_PCS")
+                             )
 
                              
                           ),
@@ -231,8 +229,6 @@ shinyUI(
         ),
         
         ### Sources 
-        
-        # A MODIFIER A PARTIR D'ICI !!!!
         tabItem(tabName = "BDD",
                 fluidPage(
                   selectizeInput(inputId = "affichage_table", label = "Choisissez une table à afficher",

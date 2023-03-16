@@ -157,6 +157,10 @@ shinyServer(function(input, output) {
       geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat professionnel`),col="black")
   })
   
+  
+# Commentaire reussite_bac_PCS
+output$comm_reussite_bac_PCS <- renderText({commg_reussite_bac_PCS})
+
 
   ### Inegalités territoriales
   
