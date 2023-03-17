@@ -17,6 +17,7 @@ library(shinycssloaders)
 library(rmapshaper)
 library(rnaturalearthdata)
 library(rnaturalearth)
+library(geometries)
 
 options(shiny.locale = "fr_FR")
 
