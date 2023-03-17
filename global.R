@@ -83,7 +83,8 @@ fr_taux_scolarisation_reg$Numero <- factor(fr_taux_scolarisation_reg$Numero)
 fr_taux_scolarisation_reg$Region <- factor(fr_taux_scolarisation_reg$Region)
 summary(fr_taux_scolarisation_reg)
 
-# PENSER A SUPPRIMER LES PCS AVEC DONT
+
+
 fr_reussite_bac <- read_delim("data/Fr-reussite_bac_origine_sociale.csv",delim=";",show_col_types = FALSE)
 fr_reussite_bac$Origine_sociale <- factor(fr_reussite_bac$Origine_sociale)
 fr_reussite_bac <- fr_reussite_bac|> 
@@ -125,6 +126,10 @@ liste_df = list("OCDE : Enseignants par élèves"=enseignant_par_eleves,
                 "France : Obtention du brevet par établissement"=fr_dnb_etablissement,
                 "France : Nombre de boursiers par établissement"=fr_boursiers_dpt,
                 "France : Obtention du baccalauréat par académie"=fr_bac_academie)
+
+
+
+
 
 
 ### Importations des fonds de carte ---
