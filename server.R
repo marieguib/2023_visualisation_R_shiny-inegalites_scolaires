@@ -153,29 +153,89 @@ shinyServer(function(input, output) {
   
   # Reussite bac selon PCS au lycee
   output$reussite_bac_PCS <- renderPlot({
-    fr_reussite_bac |> dplyr::filter(Origine_sociale==input$origine_sociale) |> 
-      ggplot()+
-      geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat general`),col="red")+
-      geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat technologique`),col="blue")+
-      geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat professionnel`),col="black")
+    df_courbe_reussite_bac <- fr_reussite_bac |> dplyr::filter(Origine_sociale==input$origine_sociale)
+    # amPlot(Annee~`Pourcentage d'admis au baccalaureat general`,data = df_courbe_reussite_bac, type="l")
+    ggplot(df_courbe_reussite_bac)+
+      geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat general`,color="baccalauréat général"))+
+      geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat technologique`,color="baccalauréat technologique"))+
+      geom_line(aes(x = Annee,y=`Pourcentage d'admis au baccalaureat professionnel`,col="baccalauréat professionnel"))+
+      labs(xlab = "Année", ylab = "Pourcentage d'admis",color="Bacs:",title="Réussite par bac selon la PCS")+
+      theme(plot.title = element_text(hjust = 0.5))
   })
   
+  # Boutton de téléchargement
+  # 
+  # output$downloadPlot <- downloadHandler(
+  #   filename = function(){
+  #     paste("graphique_",Sys.Date(),".png",sep="")
+  #   },
+  #   content = function(file){
+  #     ggsave(file,plot = output$reussite_bac_PCS())
+  #   }
+  # )
 
+  # Créer une réaction au clic sur le graphique
+  observeEvent(input$plotClick, {
+    filename <- paste("graphique_", Sys.Date(), ".png", sep="")
+    ggsave(filename, plot = output$reussite_bac_PCS)
+    file.rename(filename, paste0("./", filename))
+  })
 
   ### Inegalités territoriales
   
   # Evolution du nombre d'enseignants par élèves
+  # d <- enseignant_par_eleves |>
+  #   group_by(TIME,LOCATION) |>
+  #   mutate(nb_moy = mean(VALUE))
+  # 
+  # donnees_reactives <- reactive({
+  #   variables_a_tracer <- input$Pays_mobilite
+  #   donnees_a_tracer <- d[d$LOCATION==variables_a_tracer,]
+  #   return(donnees_a_tracer)
+  # })
+  # 
+  # observe({
+  #   donnees <- donnees_reactives()
+  #   
+  #   graphique <- rAmCharts::AmChart() |> 
+  #     rAmCharts::add_xy_chart(data = donnees, x = Annee, y = donnees$nb_moy)
+  #   
+  #   rAmCharts::amChartsOutput("evol_enseignant_eleves")
+  #   rAmCharts::renderAmCharts()
+  # })
+  
   output$evol_enseignant_eleves <- renderPlot({
     d <- enseignant_par_eleves |>
-      dplyr::filter(LOCATION==input$Pays_mobilite) |>
+      dplyr::filter(LOCATION==input$Pays_enseignant) |> 
+      group_by(TIME) |>
+      mutate(nb_moy = mean(VALUE))
+
+    m <- ggplot(d)+
+      aes(x=TIME,y=nb_moy)+
+      geom_line()+
+      labs(xlabs = "Année", ylab="Nombre moyen d'enseignant par élèves", title = paste("Evolution du nombre d'enseignant par élèves en ",input$Pays_enseignant))+
+      theme(plot.title = element_text(hjust = 0.5))
+    m
+
+  })
+  
+  output$evol_enseignant_eleves_2 <- renderPlot({
+    d <- enseignant_par_eleves |>
+      dplyr::filter(LOCATION==input$Pays_enseignant2) |> 
       group_by(TIME) |>
       mutate(nb_moy = mean(VALUE))
     
     m <- ggplot(d)+
       aes(x=TIME,y=nb_moy)+
-      geom_line()
+      geom_line()+
+      labs(xlabs = "Année", ylab="Nombre moyen d'enseignant par élèves", title = paste("Evolution du nombre d'enseignant par élèves en",input$Pays_enseignant2))+
+      theme(plot.title = element_text(hjust = 0.5))
     m
     
+  })
+  
+  output$comparaison_evol_enseignant_eleves <- renderText({
+    global_comparaison_evol_enseignant_eleves
   })
   
   # Carte du nombre d'enseignant par élèves
@@ -244,12 +304,26 @@ shinyServer(function(input, output) {
   
   
   # Etudiants en mobilite internationale
-  output$mobilite <- renderPlot({
-    ggplot(etud_mobilite)+
-      aes(x=TIME,y=VALUE,col=LOCATION==input$Pays_mobilite)+
-      geom_line()
-    
+  # output$mobilite <- renderPlot({
+  #   
+  #   etudiant_mobilite <- etud_mobilite |> 
+  #     dplyr::filter(LOCATION==input$Pays_mobilite)
+  #   
+  #   ggplot(etudiant_mobilite)+
+  #     aes(x=TIME,y=VALUE)+
+  #     geom_line()+
+  #     labs(xlab = "Année", ylab = "Nombre moyen d'étudiants en mobilité internationale", title = paste("Evolution du nombre d'étudiants en mobilité internationale en",input$Pays_mobilite))+
+  #     theme(plot.title = element_text(hjust = 0.5))
+  # })
+  
+  output$mobilite <- renderAmCharts({
+    etudiant_mobilite <- etud_mobilite |> 
+           dplyr::filter(LOCATION==input$Pays_mobilite)
+      
+    amPlot(VALUE~TIME,data =etudiant_mobilite, type="l",main = "Evolution du nombre d'étudiants en mobilité internationale")
   })
+  
+  
   
   
   ### Inegalités de genre

@@ -68,6 +68,9 @@ etud_mobilite <- bind_cols(etud_mobilite[,c(1,6:7)])
 colnames(etud_mobilite) <- c("LOCATION","TIME","VALUE")
 etud_mobilite <- etud_mobilite |> 
   dplyr::filter(TIME>=2014,TIME<=2021)
+levels(etud_mobilite$LOCATION) <- c("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
+                                    "France","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
+                                    "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","OEU","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA")
 summary(etud_mobilite)
 
 
@@ -85,7 +88,10 @@ summary(fr_taux_scolarisation_reg)
 fr_reussite_bac <- read_delim("data/Fr-reussite_bac_origine_sociale.csv",delim=";",show_col_types = FALSE)
 fr_reussite_bac$Origine_sociale <- factor(fr_reussite_bac$Origine_sociale)
 fr_reussite_bac <- fr_reussite_bac|> 
-  dplyr::filter(Annee>=2014,Annee<=2021) 
+  dplyr::filter(Annee>=2014,Annee<=2021) |> 
+  dplyr::filter(Origine_sociale!="Professions intermediaires : instituteurs et assimiles")
+
+fr_reussite_bac <- fr_reussite_bac[!grepl("^dont", fr_reussite_bac$Origine_sociale), ]
 summary(fr_reussite_bac)
 
 
@@ -231,7 +237,7 @@ voies <- ggplot(df1) +
   theme(plot.title = element_text(hjust = 0.45))
 
 
-# Carte : Taux de réussite DNB par département 
+# ---- Carte : Taux de réussite DNB par département -----
 dpt <- sf::read_sf("data/dpt")
 # Jointure entre dpt et fr_dnb_etablissement pour récupérer les multipolygons associés aux dpt
 dpt2 <- merge(x=fr_dnb_etablissement,y=dpt,by.x="Libellé_département",by.y="NOM_DEPT")
@@ -241,10 +247,22 @@ dpt3 <- dpt2 |>
   select(Session,`Code département`,Inscrits,Admis,geometry) |>
   mutate(reussite = Admis/Inscrits*100)
 
-# Carte : PCS majoritaire selon le département
-# dpt5 <- merge(x=fr_indicateur_segreg_college,y=dpt,by.x="nom_dep",by.y="NOM_DEPT") #Jointure entre les deux tables
-# dpt5 <-
+# ---- Carte : PCS majoritaire selon le département ------
+# fichier fr_segregation_sociale
+# colone proportiontfav, proportion_fav, proportion_fav et proportion_defav
+# Essai avec une seule année (pas de choix année)
+# pour chaque dpt :
+# max entre proportiontfav proportion_fav proportion_fav proportion_defav
+# représenter 
+# Carte interactive leaflet
+dpt_pcs_maj <- merge(x=fr_indicateur_segreg_college,y=dpt, by.x = "nom_dep", by.y = "NOM_DEPT")
 
+dpt_pcs_maj2 <- dpt_pcs_maj |> 
+  select(nom_dep,annee,proportion_tfav,proportion_fav,proportion_moy, proportion_defav,geometry) |> 
+  group_by(nom_dep,annee) |> 
+  mutate(PCS_maj = max(proportion_tfav,proportion_fav,proportion_moy,proportion_defav))
+
+# IDEE : faire un pivot_longer 
 
 # Carte Taux de scolarisation en france
 regions <- read_sf("data/regions-20180101-shp/")
@@ -323,3 +341,5 @@ Nous pouvons directement nous rendre compte des disparités sociales entre les c
 # Reussite bac selon PCS selon secteur au college
 commg_amchartComparaisonPCS <- HTML("Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement.
 Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée.")
+
+global_comparaison_evol_enseignant_eleves <- HTML("Ces deux graphiques permettent la comparaison entre deux pays.")
