@@ -17,7 +17,6 @@ library(shinycssloaders)
 library(rmapshaper)
 library(rnaturalearthdata)
 library(rnaturalearth)
-library(geometries)
 
 
 ### Importations des bases de données ---
