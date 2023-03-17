@@ -175,11 +175,21 @@ shinyServer(function(input, output) {
   # )
 
   # Créer une réaction au clic sur le graphique
-  observeEvent(input$plotClick, {
-    filename <- paste("graphique_", Sys.Date(), ".png", sep="")
-    ggsave(filename, plot = output$reussite_bac_PCS)
-    file.rename(filename, paste0("./", filename))
-  })
+  # observeEvent(input$plotClick, {
+  #   filename <- paste("graphique_", Sys.Date(), ".png", sep="")
+  #   ggsave(filename, plot = output$reussite_bac_PCS)
+  #   file.rename(filename, paste0("./", filename))
+  # })
+  
+  output$telechargement <- downloadHandler(
+    filename = function(file) {
+      paste("graphique_", Sys.Date(), ".png", sep="")
+    },
+    content = function(file) {
+      ggsave(file, plot = output$reussite_bac_PCS,device="png")
+    }
+    
+  )
 
   ### Inegalités territoriales
   

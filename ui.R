@@ -125,8 +125,9 @@ shinyUI(
                              fluidRow(style="margin:6px;",
                                withSpinner(
                                  plotOutput("reussite_bac_PCS", click = "plotClick"),
-                                 type = 1)
-                               # downloadButton("downloadPlot","Télécharger le graphique")
+                                 type = 1),
+                               downloadButton("telechargement","Téléchargement")
+                               # downloadButton("downloadPlot","Télécharger le graphique
                                )
   
                           
