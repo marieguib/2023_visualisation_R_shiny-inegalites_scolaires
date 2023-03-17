@@ -259,7 +259,11 @@ dpt_pcs_maj <- merge(x=fr_indicateur_segreg_college,y=dpt, by.x = "nom_dep", by.
 dpt_pcs_maj2 <- dpt_pcs_maj |> 
   select(nom_dep,annee,proportion_tfav,proportion_fav,proportion_moy, proportion_defav,geometry) |> 
   group_by(nom_dep,annee) |> 
-  mutate(PCS_maj = max(proportion_tfav,proportion_fav,proportion_moy,proportion_defav))
+  pivot_longer(cols=c(proportion_tfav,proportion_fav,proportion_moy, proportion_defav),
+               names_to = "Classe_sociale",
+               values_to = "Valeur") 
+View(dpt_pcs_maj2)
+  # mutate(PCS_maj = max(proportion_tfav,proportion_fav,proportion_moy,proportion_defav))
 
 # IDEE : faire un pivot_longer 
 
@@ -331,11 +335,6 @@ baccalaureat
 
 
 # Commentaires graphiques ---
-
-# Reussite bac selon PCS au lycee
-commg_reussite_bac_PCS <- "Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement.
-Nous pouvons directement nous rendre compte des disparités sociales entre les collèges puisque la classe sociale majoritaire dans les collèges publics est défavorisée alors que dans ceux privés, elle correspond à une classe aisée."
-
 
 # Reussite bac selon PCS selon secteur au college
 commg_amchartComparaisonPCS <- HTML("Ce graphique nous permet de distinguer la répartition des PCS selon le secteur d'enseignement.
