@@ -308,6 +308,9 @@ shinyServer(function(input, output) {
   })
   
   # Carte PCS majoritaire par département
+  output$map_pcs_dpt <- renderLeaflet({
+    carte_pcs
+  })
   
   
   

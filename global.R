@@ -261,11 +261,15 @@ dpt_pcs_maj2 <- dpt_pcs_maj |>
   group_by(nom_dep,annee) |> 
   pivot_longer(cols=c(proportion_tfav,proportion_fav,proportion_moy, proportion_defav),
                names_to = "Classe_sociale",
-               values_to = "Valeur") 
-View(dpt_pcs_maj2)
-  # mutate(PCS_maj = max(proportion_tfav,proportion_fav,proportion_moy,proportion_defav))
+               values_to = "Valeur") |> 
+  filter(Valeur == max(Valeur, na.rm=TRUE))
 
-# IDEE : faire un pivot_longer 
+carte_pcs <- leaflet() |> 
+  addTiles() |> 
+  setView(lat = 46.2276, lng = 2.2137, zoom = 5)
+ 
+
+
 
 # Carte Taux de scolarisation en france
 regions <- read_sf("data/regions-20180101-shp/")

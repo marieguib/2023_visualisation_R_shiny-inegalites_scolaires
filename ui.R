@@ -200,6 +200,13 @@ shinyUI(
                                plotOutput("carte_reussite_DNB"),
                                type = 1))
                     ),
+                    tabPanel("PCS majoritaire par département",
+                             fluidRow(style="margin:6px;",
+                               withSpinner(
+                               leafletOutput("map_pcs_dpt"),
+                               type = 1)
+                             )
+                    ),
                     
                     tabPanel("Taux de scolarisation en France",
                              fluidRow(style="margin:6px;",
