@@ -124,11 +124,13 @@ shinyUI(
                              # Modifier la mise en page de ce graphique : 
                              fluidRow(style="margin:6px;",
                                withSpinner(
-                                 plotOutput("reussite_bac_PCS"),
-                                 type = 1))
-
-                             
-                          ),
+                                 plotOutput("reussite_bac_PCS", click = "plotClick"),
+                                 type = 1)
+                               # downloadButton("downloadPlot","Télécharger le graphique")
+                               )
+  
+                          
+                           ),
                     tabPanel("Privé ou public ?",
                              style='margin:6px;',
                              h1("L'impact du privé et du public sur la scolarité"),
@@ -160,17 +162,29 @@ shinyUI(
                   tabsetPanel(
                     tabPanel("Condition d'apprentissage", # evolution du nombre d'enseignant par élève et le taux reussite
                              fluidRow(
-                               selectizeInput("Pays_mobilite",label="Pays",
+                               selectizeInput("Pays_enseignant",label="Pays",
+                                              choices = list("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
+                                                             "France","G20","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
+                                                             "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA")),
+                               selectizeInput("Pays_enseignant2",label="Pays",
                                               choices = list("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
                                                              "France","G20","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
                                                              "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA"))
+                               
                              ),
                              fluidRow(
+                               verbatimTextOutput("comparaison_evol_enseignant_eleves"),
                                box(title="Evolution nombre d'enseignant par élèves",
                                    withSpinner(
                                      plotOutput("evol_enseignant_eleves"),
                                      type = 1)
-                               )),
+                               ),
+                               box(title = "Evolution du nombre d'enseignant par élèves",
+                                   withSpinner(
+                                     plotOutput("evol_enseignant_eleves_2"),
+                                     type = 1)
+                                   )
+                             ),
 
                                box(title = "Carte du nombre d'élèves",status = "primary",width ="50000px",solidheader = TRUE,
                                    radioButtons(inputId="annee_carte",label = "Choisissez une année :",choices=c(2014,2015,2016,2017,2018,2019,2020,2021)),
@@ -199,10 +213,11 @@ shinyUI(
                     tabPanel("Etudiants en mobilité internationale",
                              selectizeInput("Pays_mobilite",label="Pays",
                                             choices = list("Australie","Autriche","Belgique","Brésil","Canada","Suisse","Chili","Colombie","Costa Rica","République Tchèque","Allemagne","Danemark","Espagne","Estonie","Finlande",
-                                                           "France","G20","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
-                                                           "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA")),
+                                                        "France","Royaume-Uni","Grèce","Hongrie","Irlande","Islande","Israël","Italie","Japon","Corée du Sud","Lituanie","Luxembourg","Lettonie","Mexique",
+                                                        "Pays-Bas","Norvège","Nouvelle-Zélande","OAVG","OEU","Pologne","Portugal","Slovaquie","Slovénie","Suède","Turquie","USA")),
                              withSpinner(
-                               plotOutput("mobilite"),
+                               # plotOutput("mobilite"),
+                               amChartsOutput("mobilite"),
                                type = 1)
                     )
                   )
