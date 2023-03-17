@@ -297,6 +297,10 @@ shinyServer(function(input, output) {
    carte
   })
   
+  # Carte PCS majoritaire par département
+  
+  
+  
   # Carte taux de scolarisation
   output$taux_scolarisation_FR <- renderPlot({
     carte_tx_scolarisation

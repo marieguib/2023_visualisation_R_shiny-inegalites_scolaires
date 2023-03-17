@@ -18,7 +18,6 @@ library(rmapshaper)
 library(rnaturalearthdata)
 library(rnaturalearth)
 
-options(shiny.locale = "fr_FR")
 
 ### Importations des bases de données ---
 
